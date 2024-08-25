@@ -12,6 +12,16 @@ import '@rainbow-me/rainbowkit/styles.css'
 import { darkTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
+/**
+ * Workaround for BigInt serialization in Tanstack Query devtools.
+ */
+if (import.meta.env.DEV) {
+  // @ts-expect-error
+  BigInt.prototype.toJSON = function () {
+    return this.toString();
+  };
+}
+
 globalThis.Buffer = Buffer
 
 const queryClient = new QueryClient()

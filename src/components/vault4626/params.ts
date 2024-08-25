@@ -1,18 +1,19 @@
+import { Props } from "@/components/vault4626/Vault4626";
 import { erc20Abi, erc4626Abi } from "viem";
-import { arbitrum } from "viem/chains";
 import { useAccount, useReadContract } from "wagmi";
 
-const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;
-
-export const useParams = () => {
+export const useParams = ({
+  chainId,
+  vaultAddress,
+}: Props) => {
   const { address: accountAddress } = useAccount();
 
   const { data: assetAddress } = useReadContract({
-    address: VAULT_ADDRESS,
+    address: vaultAddress,
     abi: erc4626Abi,
     functionName: 'asset',
     args: [],
-    chainId: arbitrum.id,
+    chainId,
   });
 
   const { data: decimals } = useReadContract({
@@ -20,7 +21,7 @@ export const useParams = () => {
     abi: erc20Abi,
     functionName: 'decimals',
     args: [],
-    chainId: arbitrum.id,
+    chainId,
   });
 
   const { data: symbol } = useReadContract({
@@ -28,7 +29,7 @@ export const useParams = () => {
     abi: erc20Abi,
     functionName: 'symbol',
     args: [],
-    chainId: arbitrum.id,
+    chainId,
   });
 
   const { data: balance } = useReadContract({
@@ -36,7 +37,7 @@ export const useParams = () => {
     abi: erc20Abi,
     functionName: 'balanceOf',
     args: [accountAddress!],
-    chainId: arbitrum.id,
+    chainId,
     query: {
       enabled: Boolean(accountAddress),
     }
@@ -46,19 +47,44 @@ export const useParams = () => {
     address: assetAddress,
     abi: erc20Abi,
     functionName: 'allowance',
-    args: [accountAddress!, VAULT_ADDRESS],
-    chainId: arbitrum.id,
+    args: [accountAddress!, vaultAddress],
+    chainId,
     query: {
       enabled: Boolean(accountAddress),
     }
   });
 
+  const { data: shares } = useReadContract({
+    address: vaultAddress,
+    abi: erc4626Abi,
+    functionName: 'balanceOf',
+    args: [accountAddress!],
+    chainId,
+    query: {
+      enabled: Boolean(accountAddress),
+    }
+  });
+
+  const { data: accountAssets } = useReadContract({
+    address: vaultAddress,
+    abi: erc4626Abi,
+    functionName: 'convertToAssets',
+    args: [shares!],
+    chainId,
+    query: {
+      enabled: Boolean(accountAddress) && Boolean(shares),
+    }
+  });
+
   return {
+    chainId,
+    vaultAddress,
     assetAddress,
     decimals,
     symbol,
     balance,
     allowance,
+    accountAssets,
   };
 }
 

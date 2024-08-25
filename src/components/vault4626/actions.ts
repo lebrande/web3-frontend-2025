@@ -1,7 +1,6 @@
-import { formSchema } from "@/components/vault4626/Vault4626";
+import { formSchema } from "@/components/vault4626/form";
 import { erc20Abi, erc4626Abi, parseUnits } from "viem";
 import { simulateContract } from "wagmi/actions";
-import { arbitrum } from "viem/chains";
 import { useConfig, useWriteContract } from "wagmi";
 import { z } from "zod";
 import { Params } from "@/components/vault4626/params";
@@ -13,7 +12,7 @@ interface Args {
 }
 
 export const useActions = ({
-  params: { assetAddress },
+  params: { assetAddress, chainId },
 }: Args) => {
   const config = useConfig();
   const { writeContractAsync } = useWriteContract();
@@ -28,7 +27,7 @@ export const useActions = ({
       abi: erc20Abi,
       functionName: 'approve',
       args: [VAULT_ADDRESS, parseUnits(values.amount, values.decimals)],
-      chainId: arbitrum.id,
+      chainId,
     });
 
     return writeContractAsync(request);
@@ -40,7 +39,7 @@ export const useActions = ({
       abi: erc4626Abi,
       functionName: 'deposit',
       args: [parseUnits(values.amount, values.decimals), values.accountAddress],
-      chainId: arbitrum.id,
+      chainId,
     });
 
     return writeContractAsync(request);
@@ -50,4 +49,6 @@ export const useActions = ({
     executeApprove,
     executeDeposit,
   };
-}
+};
+
+export type Actions = ReturnType<typeof useActions>;
