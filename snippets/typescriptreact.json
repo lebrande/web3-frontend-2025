@@ -1,0 +1,13 @@
+{
+  "Function Component": {
+    "prefix": "funcom",
+    "body": [
+      "export const $TM_FILENAME_BASE = () => {",
+      "  return (",
+      "    <div>$1</div>",
+      "  );",
+      "};"
+    ],
+    "description": "Function Component"
+  }
+}
