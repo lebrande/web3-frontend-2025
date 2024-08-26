@@ -17,7 +17,7 @@ export const AccountPosition = () => {
   }
 
   return (
-    <div className="bg-muted text-muted-foreground p-4 rounded-xl flex justify-between items-center">
+    <div className="bg-secondary text-secondary-foreground p-4 rounded-xl flex justify-between items-center">
       <p>Your account position:</p>
       <p>{formatUnits(accountAssets, decimals)} {symbol}</p>
     </div>

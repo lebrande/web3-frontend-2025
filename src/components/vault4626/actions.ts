@@ -15,7 +15,7 @@ export const useActions = ({
   params: { assetAddress, chainId },
 }: Args) => {
   const config = useConfig();
-  const { writeContractAsync } = useWriteContract();
+  const { writeContractAsync, error, reset } = useWriteContract();
 
   const executeApprove = async (values: z.infer<typeof formSchema>) => {
     if (assetAddress === undefined) {
@@ -48,6 +48,8 @@ export const useActions = ({
   return {
     executeApprove,
     executeDeposit,
+    error,
+    reset,
   };
 };
 

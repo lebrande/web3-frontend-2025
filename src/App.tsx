@@ -4,9 +4,9 @@ import { arbitrum } from "viem/chains";
 
 const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;
 
-function App() {
+export const App = () => {
   return (
-    <div className='dark bg-background text-foreground min-h-screen'>
+    <>
       <div className="flex justify-between items-center py-3 px-4">
         <h1 className="text-2xl font-bold">Web3 Frontend 2025</h1>
         <ConnectButton
@@ -27,8 +27,6 @@ function App() {
           vaultAddress={VAULT_ADDRESS}
         />
       </div>
-    </div>
+    </>
   )
 }
-
-export default App
