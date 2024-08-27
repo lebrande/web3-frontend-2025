@@ -72,7 +72,7 @@ export const useParams = ({
     args: [shares!],
     chainId,
     query: {
-      enabled: Boolean(accountAddress) && Boolean(shares),
+      enabled: Boolean(accountAddress) && shares !== undefined,
     }
   });
 
