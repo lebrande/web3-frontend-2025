@@ -19,9 +19,6 @@ jobs:
           node-version: 20.17.0
           cache: 'yarn'
       - run: yarn setup
-        env:
-          VITE_WC_PROJECT_ID: ${{ secrets.VITE_WC_PROJECT_ID }}
-          VITE_VAULT_ADDRESS: ${{ secrets.VITE_VAULT_ADDRESS }}
       #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
         # Options required for Chromatic's GitHub Action
@@ -29,3 +26,6 @@ jobs:
           #👇 Chromatic projectToken,
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          VITE_WC_PROJECT_ID: ${{ secrets.VITE_WC_PROJECT_ID }}
+          VITE_VAULT_ADDRESS: ${{ secrets.VITE_VAULT_ADDRESS }}
