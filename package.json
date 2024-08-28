@@ -13,7 +13,11 @@
     "lint": "biome check .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "sb": "yarn storybook",
+    "build-storybook": "storybook build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "t": "yarn test:watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -48,6 +52,8 @@
     "@storybook/react": "^8.2.9",
     "@storybook/react-vite": "^8.2.9",
     "@storybook/test": "^8.2.9",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.2.1",
@@ -55,12 +61,14 @@
     "autoprefixer": "^10.4.20",
     "buffer": "^6.0.3",
     "chromatic": "^11.7.1",
+    "jsdom": "^25.0.0",
     "postcss": "^8.4.41",
     "storybook": "^8.2.9",
     "tailwindcss": "^3.4.10",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
-    "vite-plugin-checker": "^0.7.2"
+    "vite-plugin-checker": "^0.7.2",
+    "vitest": "^2.0.5"
   },
   "lavamoat": {
     "allowScripts": {
