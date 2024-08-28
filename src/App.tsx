@@ -8,7 +8,8 @@ export const App = () => {
     <div className="max-w-xl m-auto space-y-8 p-8">
       <Vault4626
 
-        chainId={arbitrum.id} vaultAddress={VAULT_ADDRESS} />
+        chainId={arbitrum.id} 
+        vaultAddress={VAULT_ADDRESS} />
     </div>
   );
 };
