@@ -11,8 +11,8 @@ export const ErrorPage = () => {
         <h1 className="font-semibold text-4xl">Oops!</h1>
         <p>Sorry, an unexpected error has occurred.</p>
         <p>
-          {/* @ts-ignore */}
           <i>
+            {/* @ts-ignore */}
             {error.status} {error.statusText || error.message}
           </i>
         </p>
