@@ -7,6 +7,7 @@
     "node": "20.x"
   },
   "scripts": {
+    "prepare": "yarn lefthook install",
     "setup": "yarn install && yarn allow-scripts",
     "dev": "vite",
     "build": "tsc && vite build",
@@ -79,7 +80,8 @@
       "viem>ws>utf-8-validate": false,
       "vite>esbuild": false,
       "wagmi>@wagmi/connectors>@metamask/sdk>eciesjs>secp256k1": false,
-      "wagmi>@wagmi/connectors>cbw-sdk>keccak": false
+      "wagmi>@wagmi/connectors>cbw-sdk>keccak": false,
+      "lefthook": false
     }
   }
 }
