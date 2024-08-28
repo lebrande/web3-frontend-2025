@@ -28,4 +28,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
           VITE_WC_PROJECT_ID: ${{ secrets.VITE_WC_PROJECT_ID }}
-          VITE_VAULT_ADDRESS: ${{ secrets.VITE_VAULT_ADDRESS }}

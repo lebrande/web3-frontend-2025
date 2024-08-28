@@ -1,12 +1,45 @@
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useVaultData } from '@/ercx/useVaultData';
 import { Vault4626 } from '@/vault4626/Vault4626';
+import { VaultAddressForm } from '@/vaultAddressForm/VaultAddressForm';
+import { TerminalIcon } from 'lucide-react';
+import { useState } from 'react';
+import type { Address } from 'viem';
 import { arbitrum } from 'viem/chains';
 
-const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;
-
 export const Vault4626Route = () => {
+  const [selectedAddress, setSelectedAddress] = useState<Address>();
+
+  const { data: vaultData, error } = useVaultData({
+    chainId: arbitrum.id,
+    vaultAddress: selectedAddress,
+  });
+
+  const isValidErc4626 = Boolean(vaultData) && !error;
+
   return (
     <div className="max-w-xl m-auto space-y-8 p-8">
-      <Vault4626 chainId={arbitrum.id} vaultAddress={VAULT_ADDRESS} />
+      <VaultAddressForm
+        selectedAddress={selectedAddress}
+        setSelectedAddress={setSelectedAddress}
+      />
+      {error && <IncorrectVaultAddressAlert />}
+      {selectedAddress && isValidErc4626 && (
+        <Vault4626 chainId={arbitrum.id} vaultAddress={selectedAddress} />
+      )}
     </div>
+  );
+};
+
+const IncorrectVaultAddressAlert = () => {
+  return (
+    <Alert variant="destructive">
+      <TerminalIcon className="h-4 w-4" />
+      <AlertTitle>This is not a valid ERC-4626 vault address.</AlertTitle>
+      <AlertDescription>
+        We found an error while trying to fetch data from the vault. Please make
+        sure you have entered a valid ERC-4626 vault address.
+      </AlertDescription>
+    </Alert>
   );
 };
