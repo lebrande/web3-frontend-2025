@@ -7,7 +7,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "prepare": "yarn lefthook install",
+    "postinstall": "yarn lefthook install",
     "setup": "yarn install && yarn allow-scripts",
     "dev": "vite",
     "build": "tsc && vite build",

@@ -8,5 +8,5 @@ pre-commit:
 pre-push:
     commands:
         test:
-            run: yarn test
+            run: vitest run
             
