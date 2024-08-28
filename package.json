@@ -82,7 +82,8 @@
       "vite>esbuild": false,
       "wagmi>@wagmi/connectors>@metamask/sdk>eciesjs>secp256k1": false,
       "wagmi>@wagmi/connectors>cbw-sdk>keccak": false,
-      "lefthook": false
+      "lefthook": false,
+      "$root$": false
     }
   }
 }
