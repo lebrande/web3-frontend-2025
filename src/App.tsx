@@ -6,7 +6,9 @@ const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;
 export const App = () => {
   return (
     <div className="max-w-xl m-auto space-y-8 p-8">
-      <Vault4626 chainId={arbitrum.id} vaultAddress={VAULT_ADDRESS} />
+      <Vault4626
+
+        chainId={arbitrum.id} vaultAddress={VAULT_ADDRESS} />
     </div>
   );
 };
