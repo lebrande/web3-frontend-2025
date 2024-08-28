@@ -65,7 +65,7 @@ export const useParams = ({
     }
   });
 
-  const { data: accountAssets } = useReadContract({
+  const { data: accountAssetsDeposited } = useReadContract({
     address: vaultAddress,
     abi: erc4626Abi,
     functionName: 'convertToAssets',
@@ -79,12 +79,13 @@ export const useParams = ({
   return {
     chainId,
     vaultAddress,
+    accountAddress,
     assetAddress,
     decimals,
     symbol,
     balance,
     allowance,
-    accountAssets,
+    accountAssetsDeposited,
   };
 }
 

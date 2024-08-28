@@ -5,12 +5,12 @@ import { formatUnits } from "viem";
 export const AccountPosition = () => {
   const { params } = useVault4626();
   const {
-    accountAssets,
+    accountAssetsDeposited,
     decimals,
     symbol,
   } = params;
 
-  if (accountAssets === undefined || decimals === undefined) {
+  if (accountAssetsDeposited === undefined || decimals === undefined) {
     return (
       <Skeleton className="h-[56px]" />
     );
@@ -19,7 +19,7 @@ export const AccountPosition = () => {
   return (
     <div className="bg-secondary text-secondary-foreground p-4 rounded-xl flex justify-between items-center">
       <p>Your account position:</p>
-      <p>{formatUnits(accountAssets, decimals)} {symbol}</p>
+      <p>{formatUnits(accountAssetsDeposited, decimals)} {symbol}</p>
     </div>
   );
 };

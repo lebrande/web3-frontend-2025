@@ -5,14 +5,12 @@ import { useConfig, useWriteContract } from "wagmi";
 import { z } from "zod";
 import { Params } from "@/vault4626/params";
 
-const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;
-
 interface Args {
   params: Params;
 }
 
 export const useActions = ({
-  params: { assetAddress, chainId },
+  params: { assetAddress, chainId, vaultAddress },
 }: Args) => {
   const config = useConfig();
   const { writeContractAsync, error, reset } = useWriteContract();
@@ -26,8 +24,9 @@ export const useActions = ({
       address: assetAddress,
       abi: erc20Abi,
       functionName: 'approve',
-      args: [VAULT_ADDRESS, parseUnits(values.amount, values.decimals)],
+      args: [vaultAddress, parseUnits(values.amount, values.decimals)],
       chainId,
+      account: values.accountAddress,
     });
 
     return writeContractAsync(request);
@@ -35,11 +34,12 @@ export const useActions = ({
 
   const executeDeposit = async (values: z.infer<typeof formSchema>) => {
     const { request } = await simulateContract(config, {
-      address: VAULT_ADDRESS,
+      address: vaultAddress,
       abi: erc4626Abi,
       functionName: 'deposit',
       args: [parseUnits(values.amount, values.decimals), values.accountAddress],
       chainId,
+      account: values.accountAddress,
     });
 
     return writeContractAsync(request);

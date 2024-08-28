@@ -11,7 +11,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useAccount } from "wagmi";
 import { BaseError, formatUnits, parseUnits } from "viem";
 import { useEffect } from "react";
 import { useVault4626 } from "@/vault4626/context"
@@ -20,17 +19,15 @@ import { formSchema } from "@/vault4626/form"
 export const VaultForm = () => {
   const {
     form,
-    params,
+    params: {
+      decimals,
+      symbol,
+      balance,
+      allowance,
+      accountAddress,
+    },
     actions,
   } = useVault4626();
-  const { address: accountAddress } = useAccount();
-
-  const {
-    decimals,
-    symbol,
-    balance,
-    allowance,
-  } = params;
 
   useEffect(() => {
     if (balance !== undefined) {
@@ -80,6 +77,8 @@ export const VaultForm = () => {
     ? formatUnits(balance, decimals)
     : '0';
 
+  const isSubmitDisabled = form.formState.isDirty && !form.formState.isValid;
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -113,13 +112,13 @@ export const VaultForm = () => {
           <div className="flex gap-4">
             <Button
               type="submit"
-              disabled={!needsApproval}
+              disabled={!needsApproval || isSubmitDisabled}
             >
               {needsApproval ? 'Approve' : 'Approved'}
             </Button>
             <Button
               type="submit"
-              disabled={needsApproval}
+              disabled={needsApproval || isSubmitDisabled}
             >
               Deposit
             </Button>
