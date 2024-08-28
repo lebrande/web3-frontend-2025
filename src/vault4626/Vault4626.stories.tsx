@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
  
-import { Vault4626 } from '@/components/vault4626/Vault4626';
+import { Vault4626 } from '@/vault4626/Vault4626';
 import { ProviderDecorator } from '@/stories/ProviderDecorator';
  
 const meta = {

@@ -4,7 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { useVault4626 } from "@/components/vault4626/context";
+import { useVault4626 } from "@/vault4626/context";
 import { LoaderCircleIcon } from 'lucide-react';
 
 export const ConfirmTx = () => {

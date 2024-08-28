@@ -1,9 +1,9 @@
-import { formSchema } from "@/components/vault4626/form";
+import { formSchema } from "@/vault4626/form";
 import { erc20Abi, erc4626Abi, parseUnits } from "viem";
 import { simulateContract } from "wagmi/actions";
 import { useConfig, useWriteContract } from "wagmi";
 import { z } from "zod";
-import { Params } from "@/components/vault4626/params";
+import { Params } from "@/vault4626/params";
 
 const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;
 

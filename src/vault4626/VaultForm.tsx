@@ -14,8 +14,8 @@ import { Input } from "@/components/ui/input"
 import { useAccount } from "wagmi";
 import { BaseError, formatUnits, parseUnits } from "viem";
 import { useEffect } from "react";
-import { useVault4626 } from "@/components/vault4626/context"
-import { formSchema } from "@/components/vault4626/form"
+import { useVault4626 } from "@/vault4626/context"
+import { formSchema } from "@/vault4626/form"
 
 export const VaultForm = () => {
   const {

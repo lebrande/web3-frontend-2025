@@ -1,4 +1,4 @@
-import { Vault4626 } from "@/components/vault4626/Vault4626"
+import { Vault4626 } from "@/vault4626/Vault4626"
 import { arbitrum } from "viem/chains";
 
 const VAULT_ADDRESS = import.meta.env.VITE_VAULT_ADDRESS;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { Vault4626 } from '@/components/vault4626/Vault4626'
+import { Vault4626 } from '@/vault4626/Vault4626'
 import { arbitrum } from 'viem/chains';
 
 describe('Vault4626', () => {

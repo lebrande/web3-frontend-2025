@@ -1,4 +1,4 @@
-import { Props } from "@/components/vault4626/Vault4626";
+import { Props } from "@/vault4626/Vault4626";
 import { erc20Abi, erc4626Abi } from "viem";
 import { useAccount, useReadContract } from "wagmi";
 

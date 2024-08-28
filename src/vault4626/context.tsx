@@ -1,6 +1,6 @@
-import { Actions } from '@/components/vault4626/actions';
-import { TxForm } from '@/components/vault4626/form';
-import { Params } from '@/components/vault4626/params';
+import { Actions } from '@/vault4626/actions';
+import { TxForm } from '@/vault4626/form';
+import { Params } from '@/vault4626/params';
 import {
   createContext,
   ReactNode,

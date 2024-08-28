@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { useVault4626 } from "@/components/vault4626/context";
+import { useVault4626 } from "@/vault4626/context";
 import { formatUnits } from "viem";
 
 export const AccountPosition = () => {

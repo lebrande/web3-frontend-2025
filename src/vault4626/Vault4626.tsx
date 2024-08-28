@@ -1,8 +1,8 @@
-import { useActions } from "@/components/vault4626/actions";
-import { Content } from "@/components/vault4626/Content";
-import { Vault4626Provider } from "@/components/vault4626/context";
-import { useTxForm } from "@/components/vault4626/form";
-import { useParams } from "@/components/vault4626/params";
+import { useActions } from "@/vault4626/actions";
+import { Content } from "@/vault4626/Content";
+import { Vault4626Provider } from "@/vault4626/context";
+import { useTxForm } from "@/vault4626/form";
+import { useParams } from "@/vault4626/params";
 import { ChainId } from "@/lib/types";
 import { Address } from "viem";
 
