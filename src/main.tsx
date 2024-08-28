@@ -5,6 +5,19 @@ import ReactDOM from 'react-dom/client';
 import '@/index.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import { AppProvider } from '@/AppProvider';
+import * as Sentry from '@sentry/react';
+
+Sentry.init({
+  dsn: import.meta.env.VITE_SENTRY_DSN,
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.replayIntegration(),
+  ],
+  tracesSampleRate: 1.0,
+  tracePropagationTargets: ['localhost'],
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+});
 
 /**
  * Workaround for BigInt serialization in Tanstack Query devtools.
