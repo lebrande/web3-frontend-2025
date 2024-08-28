@@ -1,6 +1,4 @@
-import { z } from "zod"
-import { useWatch } from "react-hook-form"
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -9,23 +7,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { BaseError, formatUnits, parseUnits } from "viem";
-import { useEffect } from "react";
-import { useVault4626 } from "@/vault4626/context"
-import { formSchema } from "@/vault4626/form"
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useVault4626 } from '@/vault4626/context';
+import type { formSchema } from '@/vault4626/form';
+import { useEffect } from 'react';
+import { useWatch } from 'react-hook-form';
+import { BaseError, formatUnits, parseUnits } from 'viem';
+import type { z } from 'zod';
 
 export const VaultForm = () => {
   const {
     form,
-    params: {
-      decimals,
-      symbol,
-      balance,
-      allowance,
-      accountAddress,
-    },
+    params: { decimals, symbol, balance, allowance, accountAddress },
     actions,
   } = useVault4626();
 
@@ -53,9 +47,10 @@ export const VaultForm = () => {
     defaultValue: '',
   });
 
-  const needsApproval = (decimals !== undefined && allowance !== undefined)
-    ? allowance < parseUnits(amount, decimals)
-    : true;
+  const needsApproval =
+    decimals !== undefined && allowance !== undefined
+      ? allowance < parseUnits(amount, decimals)
+      : true;
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -66,16 +61,15 @@ export const VaultForm = () => {
       await actions.executeDeposit(values);
     } catch (error) {
       if (error instanceof BaseError) {
-        form.setError("root", {
+        form.setError('root', {
           message: error.shortMessage,
         });
       }
     }
   }
 
-  const balanceDisplay = (balance && decimals)
-    ? formatUnits(balance, decimals)
-    : '0';
+  const balanceDisplay =
+    balance && decimals ? formatUnits(balance, decimals) : '0';
 
   const isSubmitDisabled = form.formState.isDirty && !form.formState.isValid;
 
@@ -110,16 +104,10 @@ export const VaultForm = () => {
         />
         <div className="space-y-2">
           <div className="flex gap-4">
-            <Button
-              type="submit"
-              disabled={!needsApproval || isSubmitDisabled}
-            >
+            <Button type="submit" disabled={!needsApproval || isSubmitDisabled}>
               {needsApproval ? 'Approve' : 'Approved'}
             </Button>
-            <Button
-              type="submit"
-              disabled={needsApproval || isSubmitDisabled}
-            >
+            <Button type="submit" disabled={needsApproval || isSubmitDisabled}>
               Deposit
             </Button>
           </div>

@@ -1,5 +1,5 @@
-import { arbitrum } from 'wagmi/chains'
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { arbitrum } from 'wagmi/chains';
 
 export const config = getDefaultConfig({
   appName: 'Web3 Frontend 2025',
@@ -10,6 +10,6 @@ export const config = getDefaultConfig({
 
 declare module 'wagmi' {
   interface Register {
-    config: typeof config
+    config: typeof config;
   }
 }

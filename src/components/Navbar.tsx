@@ -1,4 +1,4 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export const Navbar = () => {
   return (
@@ -12,7 +12,7 @@ export const Navbar = () => {
         }}
         accountStatus={{
           smallScreen: 'avatar',
-          largeScreen: 'full'
+          largeScreen: 'full',
         }}
       />
     </div>

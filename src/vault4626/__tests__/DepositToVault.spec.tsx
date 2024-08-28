@@ -1,12 +1,12 @@
-import { describe, expect, it, vi, Mock } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import { Vault4626 } from '@/vault4626/Vault4626'
-import { arbitrum } from 'viem/chains';
-import { useParams } from '@/vault4626/params';
+import { MOCK_ADDRESS } from '@/lib/utils';
+import { Vault4626 } from '@/vault4626/Vault4626';
 import { useActions } from '@/vault4626/actions';
+import { useParams } from '@/vault4626/params';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { parseUnits } from 'viem';
-import { MOCK_ADDRESS } from '@/lib/utils';
+import { arbitrum } from 'viem/chains';
+import { type Mock, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/vault4626/params');
 vi.mock('@/vault4626/actions');
@@ -38,7 +38,7 @@ describe('Vault4626', () => {
       <Vault4626
         chainId={arbitrum.id}
         vaultAddress="0x1234567890123456789012345678901234567890"
-      />
+      />,
     );
 
     const user = userEvent.setup();
@@ -52,7 +52,9 @@ describe('Vault4626', () => {
     const depositSubmitButton = screen.getByRole('button', { name: 'Deposit' });
     expect(depositSubmitButton).toBeEnabled();
 
-    const approveSubmitButton = screen.getByRole('button', { name: 'Approved' });
+    const approveSubmitButton = screen.getByRole('button', {
+      name: 'Approved',
+    });
     expect(approveSubmitButton).toBeDisabled();
 
     await user.type(amountInput, '10');
@@ -87,9 +89,9 @@ describe('Vault4626', () => {
 
     expect(executeDepositSpy).toBeCalledWith({
       accountAddress: expect.any(String),
-      amount: "50",
+      amount: '50',
       balance: 50000000n,
       decimals: 6,
     });
-  })
+  });
 });

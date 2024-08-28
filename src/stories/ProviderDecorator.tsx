@@ -1,5 +1,5 @@
-import { AppProvider } from "@/AppProvider";
-import { Decorator } from "@storybook/react";
+import { AppProvider } from '@/AppProvider';
+import type { Decorator } from '@storybook/react';
 
 export const ProviderDecorator: Decorator = (Story) => {
   return (

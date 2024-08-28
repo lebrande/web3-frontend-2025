@@ -1,8 +1,8 @@
-import { z } from "zod"
-import { addressSchema, NUMBER_REGEX } from "@/constants";
-import { formatUnits, parseUnits } from "viem";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { NUMBER_REGEX, addressSchema } from '@/constants';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { formatUnits, parseUnits } from 'viem';
+import { z } from 'zod';
 
 export const formSchema = z
   .object({
@@ -44,6 +44,6 @@ export const useTxForm = () => {
   });
 
   return form;
-}
+};
 
 export type TxForm = ReturnType<typeof useTxForm>;

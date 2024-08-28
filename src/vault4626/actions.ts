@@ -1,9 +1,9 @@
-import { formSchema } from "@/vault4626/form";
-import { erc20Abi, erc4626Abi, parseUnits } from "viem";
-import { simulateContract } from "wagmi/actions";
-import { useConfig, useWriteContract } from "wagmi";
-import { z } from "zod";
-import { Params } from "@/vault4626/params";
+import type { formSchema } from '@/vault4626/form';
+import type { Params } from '@/vault4626/params';
+import { erc20Abi, erc4626Abi, parseUnits } from 'viem';
+import { useConfig, useWriteContract } from 'wagmi';
+import { simulateContract } from 'wagmi/actions';
+import type { z } from 'zod';
 
 interface Args {
   params: Params;
@@ -30,7 +30,7 @@ export const useActions = ({
     });
 
     return writeContractAsync(request);
-  }
+  };
 
   const executeDeposit = async (values: z.infer<typeof formSchema>) => {
     const { request } = await simulateContract(config, {
@@ -43,7 +43,7 @@ export const useActions = ({
     });
 
     return writeContractAsync(request);
-  }
+  };
 
   return {
     executeApprove,

@@ -1,7 +1,7 @@
+import path from 'node:path';
 /// <reference types="vitest" />
-import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
-import path from "path"
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 import checker from 'vite-plugin-checker';
 import { configDefaults } from 'vitest/config';
 
@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   test: {
@@ -25,4 +25,4 @@ export default defineConfig({
     css: true,
     exclude: [...configDefaults.exclude, './e2e'],
   },
-})
+});

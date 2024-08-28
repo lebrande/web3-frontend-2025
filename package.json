@@ -10,7 +10,7 @@
     "setup": "yarn install && yarn allow-scripts",
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "biome check .",
+    "lint": "biome check --fix --unsafe .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "sb": "yarn storybook",

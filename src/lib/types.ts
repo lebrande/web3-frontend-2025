@@ -1,3 +1,3 @@
-import { config } from "@/wagmi";
+import type { config } from '@/wagmi';
 
-export type ChainId = typeof config.chains[number]['id'];
+export type ChainId = (typeof config.chains)[number]['id'];
