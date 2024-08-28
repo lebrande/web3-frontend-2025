@@ -1,11 +1,12 @@
 import { Buffer } from 'buffer';
-import { App } from '@/App.tsx';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@/index.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import { AppProvider } from '@/AppProvider';
+import { router } from '@/router';
 import * as Sentry from '@sentry/react';
+import { RouterProvider } from 'react-router-dom';
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -35,7 +36,7 @@ globalThis.Buffer = Buffer;
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AppProvider>
-      <App />
+      <RouterProvider router={router} />
     </AppProvider>
   </React.StrictMode>,
 );

@@ -1,4 +1,3 @@
-import { Navbar } from '@/components/Navbar';
 import { config } from '@/wagmi';
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -15,10 +14,7 @@ export const AppProvider = ({ children }: Props) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme()}>
-          <Navbar />
-          {children}
-        </RainbowKitProvider>
+        <RainbowKitProvider theme={darkTheme()}>{children}</RainbowKitProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </WagmiProvider>
