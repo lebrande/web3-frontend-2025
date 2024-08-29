@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useVault4626 } from '@/vault4626/context';
 import type { formSchema } from '@/vault4626/form';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useEffect } from 'react';
 import { useWatch } from 'react-hook-form';
 import { BaseError, formatUnits, parseUnits } from 'viem';
@@ -104,12 +105,23 @@ export const VaultForm = () => {
         />
         <div className="space-y-2">
           <div className="flex gap-4">
-            <Button type="submit" disabled={!needsApproval || isSubmitDisabled}>
-              {needsApproval ? 'Approve' : 'Approved'}
-            </Button>
-            <Button type="submit" disabled={needsApproval || isSubmitDisabled}>
-              Deposit
-            </Button>
+            {accountAddress && (
+              <>
+                <Button
+                  type="submit"
+                  disabled={!needsApproval || isSubmitDisabled}
+                >
+                  {needsApproval ? 'Approve' : 'Approved'}
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={needsApproval || isSubmitDisabled}
+                >
+                  Deposit
+                </Button>
+              </>
+            )}
+            {!accountAddress && <ConnectButton />}
           </div>
           {allowance !== undefined && decimals !== undefined && (
             <FormDescription>
