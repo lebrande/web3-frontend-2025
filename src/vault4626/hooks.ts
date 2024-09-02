@@ -8,7 +8,7 @@ import type { z } from 'zod';
 const useSubmitApprove = () => {
   const { params, actions } = useVault4626();
 
-  const submitApprove = (values: z.infer<typeof formSchema>) => {
+  const submitApprove = async (values: z.infer<typeof formSchema>) => {
     const promise = actions.executeApprove(values);
     toast.promise(promise, {
       loading: 'Approving...',
@@ -18,7 +18,8 @@ const useSubmitApprove = () => {
       },
       error: 'Error while approving',
     });
-    return promise;
+    const allowanceFromReceipt = await promise;
+    params.setAllowanceFromReceipt(allowanceFromReceipt);
   };
 
   return submitApprove;
@@ -27,7 +28,7 @@ const useSubmitApprove = () => {
 const useSubmitDeposit = () => {
   const { params, actions } = useVault4626();
 
-  const submitDeposit = (values: z.infer<typeof formSchema>) => {
+  const submitDeposit = async (values: z.infer<typeof formSchema>) => {
     const promise = actions.executeDeposit(values);
     const amountDisplay = `${values.amount} ${params.symbol}`;
     toast.promise(promise, {
@@ -35,7 +36,7 @@ const useSubmitDeposit = () => {
       success: `Deposited ${amountDisplay}`,
       error: `Error while depositing ${amountDisplay}`,
     });
-    return promise;
+    await promise;
   };
 
   return submitDeposit;

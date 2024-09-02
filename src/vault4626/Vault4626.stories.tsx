@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ProviderDecorator } from '@/stories/ProviderDecorator';
+import { AppProviderDecorator } from '@/stories/AppProviderDecorator';
 import { Vault4626 } from '@/vault4626/Vault4626';
 
 const meta = {
   component: Vault4626,
-  decorators: [ProviderDecorator],
+  decorators: [AppProviderDecorator],
   argTypes: {
     chainId: {
       control: 'number',

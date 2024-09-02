@@ -11,7 +11,7 @@ interface Args {
 }
 
 export const useActions = ({
-  params: { assetAddress, chainId, vaultAddress, setAllowanceFromReceipt },
+  params: { assetAddress, chainId, vaultAddress },
 }: Args) => {
   const config = useConfig();
   const { writeContractAsync, error, reset } = useWriteContract();
@@ -42,7 +42,6 @@ export const useActions = ({
       logs: receipt.logs,
     });
     const allowanceFromReceipt = logs[0].args.value;
-    setAllowanceFromReceipt(allowanceFromReceipt);
     return allowanceFromReceipt;
   };
 

@@ -21,7 +21,11 @@ export const Vault4626 = ({ chainId, vaultAddress }: Props) => {
 
   return (
     <Vault4626Provider actions={actions} params={params} form={form}>
-      <Content />
+      <Vault4626Story />
     </Vault4626Provider>
   );
+};
+
+export const Vault4626Story = () => {
+  return <Content />;
 };
