@@ -5,13 +5,14 @@ import { VaultAddressForm } from '@/vaultAddressForm/VaultAddressForm';
 import { TerminalIcon } from 'lucide-react';
 import { useState } from 'react';
 import type { Address } from 'viem';
-import { arbitrum } from 'viem/chains';
+import { useChainId } from 'wagmi';
 
 export const Vault4626Route = () => {
   const [selectedAddress, setSelectedAddress] = useState<Address>();
+  const chainId = useChainId();
 
   const { data: vaultData, error } = useVaultData({
-    chainId: arbitrum.id,
+    chainId,
     vaultAddress: selectedAddress,
   });
 
@@ -25,7 +26,7 @@ export const Vault4626Route = () => {
       />
       {error && <IncorrectVaultAddressAlert />}
       {selectedAddress && isValidErc4626 && (
-        <Vault4626 chainId={arbitrum.id} vaultAddress={selectedAddress} />
+        <Vault4626 chainId={chainId} vaultAddress={selectedAddress} />
       )}
     </div>
   );

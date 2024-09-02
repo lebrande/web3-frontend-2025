@@ -1,7 +1,6 @@
 import type { formSchema } from '@/vault4626/form';
 import type { Params } from '@/vault4626/params';
 import { erc20Abi, erc4626Abi, parseEventLogs, parseUnits } from 'viem';
-import { waitForTransactionReceipt } from 'viem/actions';
 import { useConfig, usePublicClient, useWriteContract } from 'wagmi';
 import { simulateContract } from 'wagmi/actions';
 import type { z } from 'zod';
@@ -15,7 +14,9 @@ export const useActions = ({
 }: Args) => {
   const config = useConfig();
   const { writeContractAsync, error, reset } = useWriteContract();
-  const publicClient = usePublicClient();
+  const publicClient = usePublicClient({
+    chainId,
+  });
 
   const executeApprove = async (values: z.infer<typeof formSchema>) => {
     if (assetAddress === undefined) {
@@ -33,7 +34,7 @@ export const useActions = ({
 
     const hash = await writeContractAsync(request);
 
-    const receipt = await waitForTransactionReceipt(publicClient, {
+    const receipt = await publicClient.waitForTransactionReceipt({
       hash,
     });
     const logs = parseEventLogs({
