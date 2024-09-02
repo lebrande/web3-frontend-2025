@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner';
 import { config } from '@/wagmi';
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -14,7 +15,10 @@ export const AppProvider = ({ children }: Props) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme()}>{children}</RainbowKitProvider>
+        <RainbowKitProvider theme={darkTheme()}>
+          {children}
+          <Toaster />
+        </RainbowKitProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </WagmiProvider>

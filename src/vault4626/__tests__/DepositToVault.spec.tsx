@@ -26,6 +26,7 @@ describe('Vault4626', () => {
       decimals: 6,
       symbol: 'USDC',
       vaultAddress: '0x',
+      setAllowanceFromReceipt: vi.fn(),
     });
     (useActions as Mock<typeof useActions>).mockReturnValue({
       error: null,

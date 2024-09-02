@@ -1,7 +1,8 @@
 import type { formSchema } from '@/vault4626/form';
 import type { Params } from '@/vault4626/params';
-import { erc20Abi, erc4626Abi, parseUnits } from 'viem';
-import { useConfig, useWriteContract } from 'wagmi';
+import { erc20Abi, erc4626Abi, parseEventLogs, parseUnits } from 'viem';
+import { waitForTransactionReceipt } from 'viem/actions';
+import { useConfig, usePublicClient, useWriteContract } from 'wagmi';
 import { simulateContract } from 'wagmi/actions';
 import type { z } from 'zod';
 
@@ -10,10 +11,11 @@ interface Args {
 }
 
 export const useActions = ({
-  params: { assetAddress, chainId, vaultAddress },
+  params: { assetAddress, chainId, vaultAddress, setAllowanceFromReceipt },
 }: Args) => {
   const config = useConfig();
   const { writeContractAsync, error, reset } = useWriteContract();
+  const publicClient = usePublicClient();
 
   const executeApprove = async (values: z.infer<typeof formSchema>) => {
     if (assetAddress === undefined) {
@@ -29,7 +31,19 @@ export const useActions = ({
       account: values.accountAddress,
     });
 
-    return writeContractAsync(request);
+    const hash = await writeContractAsync(request);
+
+    const receipt = await waitForTransactionReceipt(publicClient, {
+      hash,
+    });
+    const logs = parseEventLogs({
+      abi: erc20Abi,
+      eventName: 'Approval',
+      logs: receipt.logs,
+    });
+    const allowanceFromReceipt = logs[0].args.value;
+    setAllowanceFromReceipt(allowanceFromReceipt);
+    return allowanceFromReceipt;
   };
 
   const executeDeposit = async (values: z.infer<typeof formSchema>) => {

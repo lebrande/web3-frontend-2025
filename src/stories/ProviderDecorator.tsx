@@ -1,14 +1,13 @@
 import { AppProvider } from '@/AppProvider';
-import { Navbar } from '@/components/Navbar';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import type { Decorator } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
 
 export const ProviderDecorator: Decorator = (Story) => {
   return (
     <AppProvider>
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
+      <div className="flex pb-4 justify-end">
+        <ConnectButton />
+      </div>
       <Story />
     </AppProvider>
   );
