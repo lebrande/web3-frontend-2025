@@ -25,4 +25,9 @@ export default defineConfig({
     css: true,
     exclude: [...configDefaults.exclude, './e2e'],
   },
+  // server: {
+  //   headers: {
+  //     'content-security-policy': `default-src 'self'; script-src 'self' 'unsafe-inline';`,
+  //   },
+  // },
 });
