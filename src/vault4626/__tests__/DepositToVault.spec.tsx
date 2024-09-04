@@ -33,7 +33,10 @@ describe('Vault4626', () => {
     (useActions as Mock<typeof useActions>).mockReturnValue({
       error: null,
       executeApprove: executeApprovalSpy,
-      executeDeposit: executeDepositSpy,
+      executeDeposit: async (args) => {
+        executeDepositSpy(args);
+        return '0x';
+      },
       reset: vi.fn(),
     });
 
