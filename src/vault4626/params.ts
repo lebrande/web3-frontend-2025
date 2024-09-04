@@ -1,3 +1,4 @@
+import type { TxToSimulateData } from '@/tenderly/types';
 import type { Props } from '@/vault4626/Vault4626';
 import { useState } from 'react';
 import { erc20Abi, erc4626Abi } from 'viem';
@@ -6,6 +7,7 @@ import { useAccount, useReadContract } from 'wagmi';
 export const useParams = ({ chainId, vaultAddress }: Props) => {
   const { address: accountAddress } = useAccount();
   const [allowanceFromReceipt, setAllowanceFromReceipt] = useState<bigint>();
+  const [txToSimulate, setTxToSimulate] = useState<TxToSimulateData>();
 
   const { data: assetAddress } = useReadContract({
     address: vaultAddress,
@@ -90,6 +92,8 @@ export const useParams = ({ chainId, vaultAddress }: Props) => {
     allowance: allowanceFromReceipt ?? allowance,
     accountAssetsDeposited,
     setAllowanceFromReceipt,
+    txToSimulate,
+    setTxToSimulate,
   };
 };
 

@@ -27,6 +27,8 @@ describe('Vault4626', () => {
       symbol: 'USDC',
       vaultAddress: '0x',
       setAllowanceFromReceipt: vi.fn(),
+      setTxToSimulate: vi.fn(),
+      txToSimulate: undefined,
     });
     (useActions as Mock<typeof useActions>).mockReturnValue({
       error: null,

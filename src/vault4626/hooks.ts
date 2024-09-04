@@ -2,7 +2,7 @@ import { useVault4626 } from '@/vault4626/context';
 import type { formSchema } from '@/vault4626/form';
 import { useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
-import { formatUnits, parseUnits } from 'viem';
+import { encodeFunctionData, erc4626Abi, formatUnits, parseUnits } from 'viem';
 import type { z } from 'zod';
 
 const useSubmitApprove = () => {
@@ -75,4 +75,29 @@ export const useNeedsApproval = () => {
       : true;
 
   return needsApproval;
+};
+
+export const useEncodeTxToSimulate = () => {
+  const {
+    params: { chainId, setTxToSimulate, vaultAddress },
+    form,
+  } = useVault4626();
+
+  const encodeTxToSimulate = () => {
+    const { amount, decimals, accountAddress } = form.getValues();
+    const calldata = encodeFunctionData({
+      abi: erc4626Abi,
+      functionName: 'deposit',
+      args: [parseUnits(amount, decimals), accountAddress],
+    });
+
+    setTxToSimulate({
+      account: accountAddress,
+      to: vaultAddress,
+      data: calldata,
+      chainId,
+    });
+  };
+
+  return encodeTxToSimulate;
 };

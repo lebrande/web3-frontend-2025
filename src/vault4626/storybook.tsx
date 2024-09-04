@@ -19,6 +19,7 @@ export const defaultArgs = {
 
 type StoryArgs = typeof defaultArgs & {
   setAllowanceFromReceipt: () => void;
+  setTxToSimulate: () => void;
   executeApprove: () => void;
   executeDeposit: () => void;
 };
@@ -39,6 +40,7 @@ export const ContextProviderDecorator: Decorator<StoryArgs> = (
     vaultAddress,
 
     setAllowanceFromReceipt,
+    setTxToSimulate,
     executeApprove,
     executeDeposit,
   } = context.args;
@@ -61,6 +63,8 @@ export const ContextProviderDecorator: Decorator<StoryArgs> = (
         setAllowanceFromReceipt,
         symbol,
         vaultAddress,
+        setTxToSimulate,
+        txToSimulate: undefined,
       }}
       form={form}
       actions={{
