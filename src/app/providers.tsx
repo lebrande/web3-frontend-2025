@@ -1,27 +1,32 @@
-import { Toaster } from '@/components/ui/sonner';
-import { config } from '@/wagmi';
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+'use client';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { type ReactNode, useState } from 'react';
+import { type State, WagmiProvider } from 'wagmi';
+
+import { Toaster } from '@/components/ui/sonner';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { arbitrum } from 'viem/chains';
-import { WagmiProvider } from 'wagmi';
 
-const queryClient = new QueryClient();
+import { getConfig } from '@/wagmi';
 
-interface Props {
-  children: React.ReactNode;
-}
+export function Providers(props: {
+  children: ReactNode;
+  initialState?: State;
+}) {
+  const [config] = useState(() => getConfig());
+  const [queryClient] = useState(() => new QueryClient());
 
-export const AppProvider = ({ children }: Props) => {
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={config} initialState={props.initialState}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider theme={darkTheme()} initialChain={arbitrum.id}>
-          {children}
+          {props.children}
           <Toaster />
         </RainbowKitProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </WagmiProvider>
   );
-};
+}

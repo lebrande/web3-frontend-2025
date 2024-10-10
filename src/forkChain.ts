@@ -6,6 +6,7 @@ export const FORK_ETHEREUM_MAINNET = {
   name: '[FORK] Ethereum mainnet',
   nativeCurrency: { name: '[FORK] Ethereum', symbol: 'FORKETH', decimals: 18 },
   rpcUrls: {
-    default: { http: [import.meta.env.VITE_FORK_RPC] },
+    // biome-ignore lint/style/noNonNullAssertion: query/enabled
+    default: { http: [process.env.NEXT_PUBLIC_FORK_RPC!] },
   },
 } as const satisfies Chain;

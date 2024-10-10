@@ -27,3 +27,7 @@ dist-ssr
 .vercel
 
 tmp
+
+#next
+.next
+tsconfig.tsbuildinfo

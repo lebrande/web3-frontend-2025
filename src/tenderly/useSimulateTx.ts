@@ -5,8 +5,8 @@ import { useConfig } from 'wagmi';
 import { prepareTransactionRequest } from 'wagmi/actions';
 import { z } from 'zod';
 
-const ACCOUNT_SLUG = import.meta.env.VITE_TENDERLY_ACCOUNT_SLUG as unknown;
-const PROJECT_SLUG = import.meta.env.VITE_TENDERLY_PROJECT_SLUG as unknown;
+const ACCOUNT_SLUG = process.env.NEXT_PUBLIC_TENDERLY_ACCOUNT_SLUG as unknown;
+const PROJECT_SLUG = process.env.NEXT_PUBLIC_TENDERLY_PROJECT_SLUG as unknown;
 
 export const useSimulateTx = (txToSimulateData: TxToSimulateData) => {
   const config = useConfig();

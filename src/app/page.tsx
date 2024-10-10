@@ -1,3 +1,6 @@
+'use client';
+
+import { Navbar } from '@/components/Navbar';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useVaultData } from '@/ercx/useVaultData';
 import { Vault4626 } from '@/vault4626/Vault4626';
@@ -7,7 +10,7 @@ import { useState } from 'react';
 import type { Address } from 'viem';
 import { useChainId } from 'wagmi';
 
-export const Vault4626Route = () => {
+function App() {
   const [selectedAddress, setSelectedAddress] = useState<Address>();
   const chainId = useChainId();
 
@@ -19,18 +22,21 @@ export const Vault4626Route = () => {
   const isValidErc4626 = Boolean(vaultData) && !error;
 
   return (
-    <div className="max-w-xl m-auto space-y-8 p-8">
-      <VaultAddressForm
-        selectedAddress={selectedAddress}
-        setSelectedAddress={setSelectedAddress}
-      />
-      {error && <IncorrectVaultAddressAlert />}
-      {selectedAddress && isValidErc4626 && (
-        <Vault4626 chainId={chainId} vaultAddress={selectedAddress} />
-      )}
-    </div>
+    <>
+      <Navbar />
+      <div className="max-w-xl m-auto space-y-8 p-8">
+        <VaultAddressForm
+          selectedAddress={selectedAddress}
+          setSelectedAddress={setSelectedAddress}
+        />
+        {error && <IncorrectVaultAddressAlert />}
+        {selectedAddress && isValidErc4626 && (
+          <Vault4626 chainId={chainId} vaultAddress={selectedAddress} />
+        )}
+      </div>
+    </>
   );
-};
+}
 
 const IncorrectVaultAddressAlert = () => {
   return (
@@ -44,3 +50,5 @@ const IncorrectVaultAddressAlert = () => {
     </Alert>
   );
 };
+
+export default App;
