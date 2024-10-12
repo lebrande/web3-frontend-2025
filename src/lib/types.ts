@@ -1,3 +1,3 @@
-import type { config } from '@/wagmi';
+import type { getConfig } from '@/wagmi';
 
-export type ChainId = (typeof config.chains)[number]['id'];
+export type ChainId = ReturnType<typeof getConfig>['chains'][number]['id'];

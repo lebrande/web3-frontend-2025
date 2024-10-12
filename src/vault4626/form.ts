@@ -1,4 +1,5 @@
-import { NUMBER_REGEX, addressSchema } from '@/constants';
+import { NUMBER_REGEX } from '@/constants';
+import { addressSchema } from '@/lib/address';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { formatUnits, parseUnits } from 'viem';

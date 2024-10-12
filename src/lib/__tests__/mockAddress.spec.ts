@@ -1,4 +1,4 @@
-import { addressSchema } from '@/constants';
+import { addressSchema } from '@/lib/address';
 import { MOCK_ADDRESS } from '@/lib/utils';
 import { expect, it } from 'vitest';
 

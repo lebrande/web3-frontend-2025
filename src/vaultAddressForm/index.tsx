@@ -1,3 +1,4 @@
+import { IncorrectVaultAddressAlert } from '@/components/IncorrectVaultAddressAlert';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -8,23 +9,36 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { addressSchema } from '@/constants';
+import { useVaultData } from '@/ercx/useVaultData';
+import { addressSchema } from '@/lib/address';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RotateCcwIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import { LoaderCircleIcon, ScanSearchIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { Address } from 'viem';
+import { useChainId } from 'wagmi';
 import { z } from 'zod';
 
 interface Props {
-  selectedAddress: Address | undefined;
-  setSelectedAddress: (address: Address | undefined) => void;
+  onVaultAddressTyped: (address: Address) => void;
 }
 
-export const VaultAddressForm = ({
-  selectedAddress,
-  setSelectedAddress,
-}: Props) => {
+export const VaultAddressForm = ({ onVaultAddressTyped }: Props) => {
+  const [selectedAddress, setSelectedAddress] = useState<Address>();
+
+  const chainId = useChainId();
+
+  const {
+    data: vaultData,
+    error,
+    isFetching,
+  } = useVaultData({
+    chainId,
+    vaultAddress: selectedAddress,
+  });
+
+  const isValidErc4626 = Boolean(vaultData) && !error;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,18 +50,17 @@ export const VaultAddressForm = ({
     setSelectedAddress(values.vaultAddress);
   }
 
-  const isAddressSelected = Boolean(selectedAddress);
-
-  const onReset = () => {
-    setSelectedAddress(undefined);
-    form.reset();
-  };
-
   useEffect(() => {
     if (form.formState.isValid) {
       form.handleSubmit(onSubmit)();
     }
   }, [form.formState.isValid]);
+
+  useEffect(() => {
+    if (selectedAddress && isValidErc4626) {
+      onVaultAddressTyped(selectedAddress);
+    }
+  }, [isValidErc4626, selectedAddress]);
 
   return (
     <Form {...form}>
@@ -62,23 +75,43 @@ export const VaultAddressForm = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Vault address</FormLabel>
-              {isAddressSelected && (
-                <div className="flex gap-4">
-                  <Input disabled value={selectedAddress} />
-                  <Button className="gap-2" onClick={onReset}>
-                    <RotateCcwIcon /> Check other address
-                  </Button>
+              <div className="grid md:grid-cols-8 gap-4">
+                <div className="md:col-span-5">
+                  <FormControl>
+                    <Input
+                      placeholder="0x"
+                      {...field}
+                      onChange={(event) => {
+                        if (
+                          selectedAddress &&
+                          selectedAddress === field.value
+                        ) {
+                          setSelectedAddress(undefined);
+                          form.clearErrors('vaultAddress');
+                        }
+                        return field.onChange(event);
+                      }}
+                      disabled={isFetching}
+                    />
+                  </FormControl>
                 </div>
-              )}
-              {!isAddressSelected && (
-                <FormControl>
-                  <Input placeholder="0x" {...field} />
-                </FormControl>
-              )}
+                <div className="md:col-span-3">
+                  {isFetching ? (
+                    <Button className="gap-2 w-full" type="button" disabled>
+                      <LoaderCircleIcon className="animate-spin" /> Loading...
+                    </Button>
+                  ) : (
+                    <Button className="gap-2 w-full" type="submit">
+                      <ScanSearchIcon /> Check this address
+                    </Button>
+                  )}
+                </div>
+              </div>
               <FormMessage />
             </FormItem>
           )}
         />
+        {error && <IncorrectVaultAddressAlert />}
       </form>
     </Form>
   );
