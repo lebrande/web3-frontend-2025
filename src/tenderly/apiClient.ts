@@ -1,6 +1,7 @@
+import { ENV } from '@/env';
 import axios from 'axios';
 
-const ACCESS_TOKEN = process.env.NEXT_PUBLIC_TENDERLY_ACCESS_TOKEN as unknown;
+const ACCESS_TOKEN = ENV.TENDERLY_ACCESS_TOKEN;
 
 export const tenderlyApiClient = axios.create({
   baseURL: 'https://api.tenderly.co/api',

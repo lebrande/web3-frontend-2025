@@ -1,15 +1,15 @@
 import { MOCK_ADDRESS } from '@/lib/utils';
-import { Vault4626 } from '@/vault4626/Vault4626';
-import { useActions } from '@/vault4626/actions';
-import { useParams } from '@/vault4626/params';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { parseUnits } from 'viem';
 import { arbitrum } from 'viem/chains';
 import { type Mock, describe, expect, it, vi } from 'vitest';
+import { Vault4626 } from '..';
+import { useActions } from '../actions';
+import { useParams } from '../params';
 
-vi.mock('@/vault4626/params');
-vi.mock('@/vault4626/actions');
+vi.mock('../params');
+vi.mock('../actions');
 
 const executeDepositSpy = vi.fn();
 const executeApprovalSpy = vi.fn();

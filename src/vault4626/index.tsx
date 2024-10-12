@@ -1,10 +1,10 @@
 import type { ChainId } from '@/lib/types';
-import { Content } from '@/vault4626/Content';
-import { useActions } from '@/vault4626/actions';
-import { Vault4626Provider } from '@/vault4626/context';
-import { useTxForm } from '@/vault4626/form';
-import { useParams } from '@/vault4626/params';
 import type { Address } from 'viem';
+import { useActions } from './actions';
+import { Content } from './content';
+import { Vault4626Provider } from './context';
+import { useTxForm } from './form';
+import { useParams } from './params';
 
 export interface Props {
   chainId: ChainId;
@@ -21,11 +21,7 @@ export const Vault4626 = ({ chainId, vaultAddress }: Props) => {
 
   return (
     <Vault4626Provider actions={actions} params={params} form={form}>
-      <Vault4626Story />
+      <Content />
     </Vault4626Provider>
   );
-};
-
-export const Vault4626Story = () => {
-  return <Content />;
 };

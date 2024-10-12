@@ -6,9 +6,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useVault4626 } from '@/vault4626/context';
 import { CircleXIcon } from 'lucide-react';
 import { BaseError } from 'viem';
+import { useVault4626 } from '../context';
 
 export const TxError = () => {
   const {

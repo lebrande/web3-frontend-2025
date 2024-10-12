@@ -1,8 +1,8 @@
 import type { TxToSimulateData } from '@/tenderly/types';
-import type { Props } from '@/vault4626/Vault4626';
 import { useState } from 'react';
 import { erc20Abi, erc4626Abi } from 'viem';
 import { useAccount, useReadContract } from 'wagmi';
+import type { Props } from '.';
 
 export const useParams = ({ chainId, vaultAddress }: Props) => {
   const { address: accountAddress } = useAccount();

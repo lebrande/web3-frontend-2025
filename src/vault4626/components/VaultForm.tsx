@@ -1,10 +1,10 @@
 import { Form } from '@/components/ui/form';
-import { Allowance } from '@/vault4626/Allowance';
-import { AmountInput } from '@/vault4626/AmountInput';
-import { FormButtons } from '@/vault4626/FormButtons';
-import { useVault4626 } from '@/vault4626/context';
-import { useOnSubmit } from '@/vault4626/hooks';
 import { useEffect } from 'react';
+import { useVault4626 } from '../context';
+import { useOnSubmit } from '../contextHooks';
+import { Allowance } from './Allowance';
+import { AmountInput } from './AmountInput';
+import { FormButtons } from './FormButtons';
 
 export const VaultForm = () => {
   const {

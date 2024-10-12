@@ -7,8 +7,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useVault4626 } from '@/vault4626/context';
 import { formatUnits } from 'viem';
+import { useVault4626 } from '../context';
 
 export const AmountInput = () => {
   const {

@@ -1,9 +1,9 @@
-import type { formSchema } from '@/vault4626/form';
-import type { Params } from '@/vault4626/params';
 import { erc20Abi, erc4626Abi, parseEventLogs, parseUnits } from 'viem';
 import { useConfig, usePublicClient, useWriteContract } from 'wagmi';
 import { simulateContract } from 'wagmi/actions';
 import type { z } from 'zod';
+import type { formSchema } from './form';
+import type { Params } from './params';
 
 interface Args {
   params: Params;

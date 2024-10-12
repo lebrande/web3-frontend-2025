@@ -3,7 +3,7 @@
 import { Navbar } from '@/components/Navbar';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useVaultData } from '@/ercx/useVaultData';
-import { Vault4626 } from '@/vault4626/Vault4626';
+import { Vault4626 } from '@/vault4626';
 import { VaultAddressForm } from '@/vaultAddressForm/VaultAddressForm';
 import { TerminalIcon } from 'lucide-react';
 import { useState } from 'react';

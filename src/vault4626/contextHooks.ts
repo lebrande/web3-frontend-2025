@@ -1,9 +1,9 @@
-import { useVault4626 } from '@/vault4626/context';
-import type { formSchema } from '@/vault4626/form';
 import { useWatch } from 'react-hook-form';
 import { toast } from 'sonner';
 import { encodeFunctionData, erc4626Abi, formatUnits, parseUnits } from 'viem';
 import type { z } from 'zod';
+import { useVault4626 } from './context';
+import type { formSchema } from './form';
 
 const useSubmitApprove = () => {
   const { params, actions } = useVault4626();

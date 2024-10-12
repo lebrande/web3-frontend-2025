@@ -7,8 +7,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Simulation } from '@/simulation/Simulation';
-import { useVault4626 } from '@/vault4626/context';
-import { useEncodeTxToSimulate } from '@/vault4626/hooks';
+import { useVault4626 } from '../context';
+import { useEncodeTxToSimulate } from '../contextHooks';
 
 export const DepositTxSimulation = () => {
   const {

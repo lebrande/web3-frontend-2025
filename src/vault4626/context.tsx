@@ -1,7 +1,7 @@
-import type { Actions } from '@/vault4626/actions';
-import type { TxForm } from '@/vault4626/form';
-import type { Params } from '@/vault4626/params';
 import { type ReactNode, createContext, useContext } from 'react';
+import type { Actions } from './actions';
+import type { TxForm } from './form';
+import type { Params } from './params';
 
 const Context = createContext<Args | null>(null);
 

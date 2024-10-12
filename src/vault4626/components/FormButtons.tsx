@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { useVault4626 } from '@/vault4626/context';
-import { useNeedsApproval } from '@/vault4626/hooks';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useVault4626 } from '../context';
+import { useNeedsApproval } from '../contextHooks';
 
 export const FormButtons = () => {
   const {

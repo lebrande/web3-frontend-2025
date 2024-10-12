@@ -1,11 +1,13 @@
 import { MOCK_ADDRESS, sleep } from '@/lib/utils';
-import { Vault4626Provider } from '@/vault4626/context';
-import { useTxForm } from '@/vault4626/form';
+import type { Meta, StoryObj } from '@storybook/react';
 import type { Decorator } from '@storybook/react';
 import { parseUnits } from 'viem';
 import { arbitrum } from 'viem/chains';
+import { Content } from './content';
+import { Vault4626Provider } from './context';
+import { useTxForm } from './form';
 
-export const defaultArgs = {
+const defaultArgs = {
   chainId: arbitrum.id,
   vaultAddress: MOCK_ADDRESS,
   accountAddress: MOCK_ADDRESS,
@@ -24,10 +26,7 @@ type StoryArgs = typeof defaultArgs & {
   executeDeposit: () => void;
 };
 
-export const ContextProviderDecorator: Decorator<StoryArgs> = (
-  Story,
-  context,
-) => {
+const ContextProviderDecorator: Decorator<StoryArgs> = (Story, context) => {
   const {
     accountAddress,
     accountAssetsDeposited,
@@ -86,3 +85,22 @@ export const ContextProviderDecorator: Decorator<StoryArgs> = (
     </Vault4626Provider>
   );
 };
+
+const meta = {
+  component: Content,
+  decorators: [
+    // @ts-expect-error
+    ContextProviderDecorator,
+  ],
+  argTypes: {
+    setAllowanceFromReceipt: { action: 'setAllowanceFromReceipt' },
+    executeApprove: { action: 'executeApprove' },
+    executeDeposit: { action: 'executeDeposit' },
+  },
+  args: defaultArgs,
+} satisfies Meta<typeof Content>;
+
+export default meta;
+type Story = StoryObj<typeof Content>;
+
+export const Default: Story = {};

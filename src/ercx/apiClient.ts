@@ -1,6 +1,7 @@
+import { ENV } from '@/env';
 import axios from 'axios';
 
-const API_KEY = process.env.NEXT_PUBLIC_ERCX_API_TOKEN as unknown;
+const API_KEY = ENV.ERCX_API_TOKEN as unknown;
 
 export const ercxApiClient = axios.create({
   baseURL: 'https://ercx.runtimeverification.com',

@@ -1,3 +1,4 @@
+import { ENV } from '@/env';
 import { tenderlyApiClient } from '@/tenderly/apiClient';
 import type { TxToSimulateData } from '@/tenderly/types';
 import { useQuery } from '@tanstack/react-query';
@@ -5,8 +6,8 @@ import { useConfig } from 'wagmi';
 import { prepareTransactionRequest } from 'wagmi/actions';
 import { z } from 'zod';
 
-const ACCOUNT_SLUG = process.env.NEXT_PUBLIC_TENDERLY_ACCOUNT_SLUG as unknown;
-const PROJECT_SLUG = process.env.NEXT_PUBLIC_TENDERLY_PROJECT_SLUG as unknown;
+const ACCOUNT_SLUG = ENV.TENDERLY_ACCOUNT_SLUG;
+const PROJECT_SLUG = ENV.TENDERLY_PROJECT_SLUG;
 
 export const useSimulateTx = (txToSimulateData: TxToSimulateData) => {
   const config = useConfig();

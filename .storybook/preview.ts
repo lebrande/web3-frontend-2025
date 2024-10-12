@@ -1,4 +1,4 @@
-import '../src/index.css';
+import '../src/app/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { Preview } from '@storybook/react';
 

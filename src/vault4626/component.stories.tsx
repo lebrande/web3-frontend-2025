@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
 import { AppProviderDecorator } from '@/stories/AppProviderDecorator';
-import { Vault4626 } from '@/vault4626/Vault4626';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Vault4626 } from '.';
 
 const meta = {
   component: Vault4626,
@@ -19,4 +18,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Vault4626>;
 
-export const Primary: Story = {};
+export const Default: Story = {};
