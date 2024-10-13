@@ -3,7 +3,7 @@ name: 'Chromatic Publish'
 on:
   push:
       branches:
-          - main
+          - storybook
 
 jobs:
   test:
